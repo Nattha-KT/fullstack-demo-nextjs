@@ -1,10 +1,13 @@
 
 import Link from "next/link";
+import { useState, useEffect, cache } from "react";
+
 async function fetchBlog(){
   const res = await fetch("http://localhost:3000/api/blog",{
-    next: {
-      revalidate: 10
-    }
+    cache:"no-store",
+    //  next: {
+    //   revalidate: 10
+    // }
   });
   const data = await res.json();
   return data.posts;
@@ -12,25 +15,26 @@ async function fetchBlog(){
 
 export default async function Home() {
   const posts = await fetchBlog();
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <main className="w-full h-full">
       <div className="md:w-2/4 sm:w-3/4 m-auto p-4 my-5 rounded-lg bg-slate-800 drop-shadow-xl">
         <h1 className="text-slate-200 text-center text-2 font-extrabold font-[verdana]">
-        Full Stack Test With Next.js</h1>
+        Full Stack Test With Next.js 🤖</h1>
       </div>
       {/* Link to add sheet */}
       <div className="flex my-5">
-          <Link href={"/sheet/add"} className="md:w-1/6 sm:w-2/4 rounded-md text-center p-2 m-auto bg-slate-200">
-            Add New Sheet ➕🤗
+       
+          <Link href={"/sheet/add"} className="md:w-1/6 sm:w-2/4 rounded-md text-center p-2 m-auto bg-slate-100  hover:bg-slate-400 ">
+              Add New Sheet 🧠🚀
           </Link>
-
-        </div>
+       
+      </div>
         {/* Show more */}
         <div className="w-full  flex flex-col justify-center items-center">
           {posts?.map((post:any)=>(
-            <div className=" w-3/4 p-4 rounded-md mx-3 my-2 bg-slate-200 flex flex-col justify-center">
+            <div className=" w-3/4 p-4 rounded-md mx-3 my-2 bg-slate-100 flex flex-col justify-center">
               {/* Title and Course code */}
               <div className="flex items-center my-3">
                 <div className="mr-auto">
